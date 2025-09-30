@@ -4,6 +4,7 @@ Implementing Linux containers
 
 ## Prequisite
 
+- golang
 - docker(recommended)
 
 ## Building
