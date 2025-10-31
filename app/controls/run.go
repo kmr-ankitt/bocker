@@ -5,8 +5,6 @@ import (
 	"os"
 	"os/exec"
 	"syscall"
-
-	"github.com/kmr-ankitt/bocker/app/helpers"
 )
 
 func Run(osArgs ...string) {
@@ -37,10 +35,4 @@ func Run(osArgs ...string) {
 		fmt.Printf("Error executing command: %v\n", err)
 		os.Exit(1)
 	}
-
-	// Setup cgroup for the child process
-	helpers.SetupCgroup(cmd.Process.Pid)
-
-	// Wait for container to exit
-	cmd.Wait()
 }
