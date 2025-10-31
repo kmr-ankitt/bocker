@@ -5,6 +5,8 @@ import (
 	"os"
 	"os/exec"
 	"syscall"
+
+	"github.com/kmr-ankitt/bocker/app/helpers"
 )
 
 /**
@@ -14,6 +16,8 @@ Implements the child process logic
 **/
 func Child(osArgs ...string) {
 	syscall.Sethostname([]byte("bocker"))
+	helpers.Chroot()
+	syscall.Mount("proc", "/proc", "proc", 0, "")
 
 	cmd := exec.Command(osArgs[0], osArgs[1:]...)
 	cmd.Stdin = os.Stdin
@@ -25,4 +29,6 @@ func Child(osArgs ...string) {
 		fmt.Printf("Error executing command: %v\n", err)
 		os.Exit(1)
 	}
+
+	defer syscall.Unmount("/proc", 0)
 }
