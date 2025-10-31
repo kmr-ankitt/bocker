@@ -6,7 +6,7 @@ import (
 	"os/exec"
 )
 
-func CreateFS(){
+func createFS(){
 	fmt.Println("Creating File System...")
 
 	err := os.Mkdir("./rootfs", 0755)
@@ -17,5 +17,11 @@ func CreateFS(){
 	cmd := exec.Command("debootstrap", "--variant=minbase", "stable", "./rootfs", "http://deb.debian.org/debian/")
 	if err := cmd.Run(); err != nil {
 		fmt.Printf("Failed to run debootstrap: %v\n", err)
+	}
+}
+
+func CreateFS(){
+	if _, err := os.Stat("./rootfs"); os.IsNotExist(err) {
+		createFS()
 	}
 }
