@@ -24,11 +24,10 @@ func Child(osArgs ...string) {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
+	defer syscall.Unmount("/proc", 0)
 	err := cmd.Run()
 	if err != nil {
 		fmt.Printf("Error executing command: %v\n", err)
 		os.Exit(1)
 	}
-
-	defer syscall.Unmount("/proc", 0)
 }
