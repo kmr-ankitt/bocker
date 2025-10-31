@@ -6,7 +6,7 @@ import (
 	"os/exec"
 )
 
-func createFS(){
+func createRootFS(){
 	fmt.Println("Creating File System...")
 
 	err := os.Mkdir("./rootfs", 0755)
@@ -22,6 +22,6 @@ func createFS(){
 
 func CreateFS(){
 	if _, err := os.Stat("./rootfs"); os.IsNotExist(err) {
-		createFS()
+		createRootFS()
 	}
 }
