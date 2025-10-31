@@ -5,6 +5,8 @@ import (
 	"os"
 	"os/exec"
 	"syscall"
+
+	"github.com/kmr-ankitt/bocker/app/helpers"
 )
 
 func Run(osArgs ...string) {
@@ -26,12 +28,19 @@ func Run(osArgs ...string) {
 	cmd.Stderr = os.Stderr
 
 	cmd.SysProcAttr = &syscall.SysProcAttr{
-		Cloneflags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID,
+		Cloneflags: syscall.CLONE_NEWUTS | syscall.CLONE_NEWPID | syscall.CLONE_NEWNS,
 	}
 
+	// Start the child process
 	err := cmd.Run()
 	if err != nil {
 		fmt.Printf("Error executing command: %v\n", err)
 		os.Exit(1)
 	}
+
+	// Setup cgroup for the child process
+	helpers.SetupCgroup(cmd.Process.Pid)
+
+	// Wait for container to exit
+	cmd.Wait()
 }
