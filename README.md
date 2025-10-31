@@ -6,6 +6,7 @@ Implementing Linux containers
 
 - golang
 - docker(recommended)
+- debootstrap(use your package manager to install it)
 
 ## Building
 
