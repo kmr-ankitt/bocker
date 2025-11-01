@@ -19,10 +19,12 @@ docker build -t bocker .
 or
 
 ```bash
-go build app/main.go
+go build -o bocker app/main.go
 ```
 
 ## Running
+
+Commands will be running inside a sandboxed environment which will not affect your host system.
 
 ```bash
 docker run --rm -it --privileged bocker <ARGUMENTS>
@@ -31,5 +33,14 @@ docker run --rm -it --privileged bocker <ARGUMENTS>
 or
 
 ```bash
-./main <ARGUMENTS>
+./bocker run <ARGUMENTS>
+```
+
+## Example
+
+Installing cowsay in bocker and running
+
+```bash
+./bocker run apt-get install cowsay
+./bocker run cowsay Hello, Bocker!
 ```
