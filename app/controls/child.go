@@ -22,8 +22,8 @@ func Child(osArgs ...string) {
 
 	containerID := "bocker"
 
-	// Setting PID limit to 50 and Memory limit to 100MB
-	if err := cgroups.Apply(containerID, 50, 100); err != nil {
+	// Setting PID limit to 50 and Memory limit to 200MB
+	if err := cgroups.Apply(containerID, 50, 200); err != nil {
 			fmt.Println("cgroup error:", err)
 	}
 

@@ -38,9 +38,9 @@ or
 
 ## Example
 
-Installing cowsay in bocker and running
+Installing fzf in bocker and running
 
 ```bash
-./bocker run apt-get install cowsay
-./bocker run cowsay Hello, Bocker!
+./bocker run apt-get install fzf
+./bocker run fzf Hello, Bocker!
 ```
